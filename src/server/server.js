@@ -23,8 +23,6 @@ Mongoose.connection.on('error',(err,data)=>{
     console.log('Error in connection ',err)
 })
 
-app.use('*', cors({ origin: 'http://localhost:9000' }));
-
 const graphqlMiddleware = expressGraphQL(req => ({
     schema,
     graphiql: true,
@@ -33,5 +31,6 @@ const graphqlMiddleware = expressGraphQL(req => ({
 }));
 
 app.use('/graphql', graphqlMiddleware)
+app.use('*', cors({ origin: 'http://localhost:9000' }))
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
