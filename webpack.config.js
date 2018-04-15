@@ -35,11 +35,11 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "src/client/index.html"),
-            filename: 'index.html'
+            filename: './index.html'
         })
     ],
     devServer: {
-        contentBase: path.resolve(__dirname, "public"),
+        contentBase: path.resolve(__dirname, "/"),
         compress: true,
         port: 9000,
         stats: 'errors-only',

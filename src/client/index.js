@@ -2,13 +2,12 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import App from './component/app'
 import { ApolloProvider } from 'react-apollo'
-import { ApolloClient } from 'apollo-boost'
-import { HttpLink } from 'apollo-link-http'
+//import ApolloClient, {createNetworkInterface} from 'apollo-client'
+import ApolloClient from "apollo-boost"
+
 
 const client = new ApolloClient({
-    link: HttpLink({
-        uri: 'http://localhost:4000/graphql'
-    })
+    uri:  'http://localhost:4000/graphql'
 })
 
 ReactDom.render(
