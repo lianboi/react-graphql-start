@@ -1,7 +1,6 @@
 
-import {userType, userInputType } from './user'
+import {userType } from '../user/user.type'
 
 export {
-    userType,
-    userInputType
+    userType
 }

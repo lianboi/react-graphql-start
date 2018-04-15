@@ -10,6 +10,7 @@ class App extends Component {
         return (
             <div>
                 <h1>Start To Do App</h1>
+                <p> Start the Application </p>
             </div>
         )
     }

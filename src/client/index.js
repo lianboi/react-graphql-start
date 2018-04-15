@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import App from './component/app'
 import { ApolloProvider } from 'react-apollo'
-import { ApolloClient } from 'apollo-client'
+import { ApolloClient } from 'apollo-boost'
 import { HttpLink } from 'apollo-link-http'
 
 const client = new ApolloClient({

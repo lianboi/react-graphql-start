@@ -1,23 +1,29 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
-    entry: path.resolve(__dirname,'src/client/index.js'),
+    mode: "production",
+    entry: [
+        path.resolve(__dirname, "src/client/index.js"),
+        'react-hot-loader/patch'
+    ],
     output: {
-        path: path.resolve('dist'),
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, "/"),
+        publicPath: "/",
+        filename: "bundle.js"
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015', 'react'],
+                        presets: ['env','es2015', 'react', 'stage-0'],
                     }
                 },
-                exclude: /node_modules/
+                exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
@@ -28,15 +34,16 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname,'src/client/index.html'),
+            template: path.resolve(__dirname, "src/client/index.html"),
             filename: 'index.html'
         })
     ],
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.resolve(__dirname, "public"),
         compress: true,
         port: 9000,
         stats: 'errors-only',
-        historyApiFallback: true
+        historyApiFallback: true,
+        open: true
     }
 }
