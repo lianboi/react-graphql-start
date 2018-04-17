@@ -1,5 +1,5 @@
-import user from './user'
+import { fetchToDo } from '../todo/todo.query'
 
 export default {
-    user
+    fetchToDo
 }
