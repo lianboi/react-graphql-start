@@ -3,6 +3,8 @@ import { graphql, withApollo, compose } from 'react-apollo'
 import ToDoForm from './todoForm'
 import ToDoList from './todoListing'
 
+import fetchToDo from '../query/fetchToDo.graphql'
+
 class TodoContainer extends Component {
     constructor(props) {
         super(props)
@@ -20,6 +22,8 @@ class TodoContainer extends Component {
     }
 
     render() {
+        const {data: fetchToDo, loading} = this.props
+        console.log( this.props.data, 'get----' )
         return (
             <div className="panel panel-default" style={{'height': 'auto', 'width':'900px', 'margin': '0 auto'}}>
                 <div className="panel-heading">ToDo Form</div>
@@ -27,11 +31,14 @@ class TodoContainer extends Component {
                     <ToDoForm getToDo = {this.getToDo}/>
                 </div>
                 <div className="panel-body">
-                    <ToDoList Todos = {this.state.todo}/>
+                    <ToDoList Todos = {fetchToDo}/>
                 </div>
             </div>
         )
     }
 }
 
-export default compose(withApollo)(TodoContainer)
+export default compose(
+    withApollo,
+    graphql(fetchToDo)
+)(TodoContainer)

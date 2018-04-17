@@ -28,9 +28,10 @@ const graphqlMiddleware = expressGraphQL(req => ({
     graphiql: true,
     rootValue: { request: req },
     pretty: true,
-}));
+}))
+
+app.use('*', cors({ origin: 'http://localhost:9000' }))
 
 app.use('/graphql', graphqlMiddleware)
-app.use('*', cors({ origin: 'http://localhost:9000' }))
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
