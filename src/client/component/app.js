@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ToDoForm from './todoForm'
+import Todo from './Todo'
 
 
 class App extends Component {
@@ -11,8 +11,7 @@ class App extends Component {
         return (
             <div>
                 <h1>Start To Do App</h1>
-                <p> Start the Application </p>
-                <ToDoForm/>
+                <Todo/>
             </div>
         )
     }
