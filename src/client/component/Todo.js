@@ -23,7 +23,6 @@ class TodoContainer extends Component {
 
     render() {
         const {data: fetchToDo, loading} = this.props
-        console.log( this.props.data, 'get----' )
         return (
             <div className="panel panel-default" style={{'height': 'auto', 'width':'900px', 'margin': '0 auto'}}>
                 <div className="panel-heading">ToDo Form</div>
@@ -38,7 +37,11 @@ class TodoContainer extends Component {
     }
 }
 
+const fetchToDoOptions = {
+    fetchPolicy: 'network-only'
+
+}
 export default compose(
     withApollo,
-    graphql(fetchToDo)
+    graphql(fetchToDo, fetchToDoOptions)
 )(TodoContainer)
