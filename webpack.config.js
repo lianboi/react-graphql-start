@@ -28,6 +28,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: 'style-loader!css-loader'
+            },
+            {
+                test: /\.(graphql|gql)$/,
+                loader: 'graphql-tag/loader'
             }
 
         ]
