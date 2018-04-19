@@ -1,14 +1,6 @@
-import {
-    GraphQLNonNull,
-    GraphQLID
-} from 'graphql'
-
-// import { postType } from '../../types/post'
-// import UserModel from '../../../models/post'
-
 import { userType } from '../type'
 
-export default {
+export const userMutation = {
     type: userType,
     args: {
         id: {

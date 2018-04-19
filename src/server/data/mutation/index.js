@@ -1,4 +1,4 @@
-import userMutation from './user'
+import {userMutation} from '../user/user.mutation'
 
 export default {
     userMutation
