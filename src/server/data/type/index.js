@@ -1,8 +1,6 @@
 
-import {userType } from '../user/user.type'
-import { ToDoType } from '../todo/todo.type'
+import { UserType } from '../User/User.type'
 
 export {
-    userType,
-    ToDoType
+    UserType
 }

@@ -1,5 +1,0 @@
-query fetchToDo {
-    fetchToDo {
-        name
-    }
-}

@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
 
-const ToDoListing = (props) => {
-    const { Todos = [] } = props
+const UserListing = (props) => {
+    const { users = [] } = props
 
-    const todoList = Todos.length > 0 && Todos.map((todo, index) => {
+    const userList = users.length > 0 && users.map((user, index) => {
             return (
                 <tr className="success" key={index}>
                     <td>{index+1}</td>
-                    <td>{todo.name}</td>
+                    <td>{user.name}</td>
+                    <td>{user.type}</td>
+
                 </tr>
             )
         })
@@ -15,16 +17,17 @@ const ToDoListing = (props) => {
     return (
         <div>
             {
-               Todos.length >0 ?
+               users.length >0 ?
                    <table className="table">
                        <thead>
                            <tr>
                                <th>Sr No.</th>
-                               <th>Todo name </th>
+                               <th>User name </th>
+                               <th>User type </th>
                            </tr>
                        </thead>
                        <tbody>
-                        {todoList}
+                        {userList}
                        </tbody>
                    </table> : null
             }
@@ -32,4 +35,4 @@ const ToDoListing = (props) => {
     )
 }
 
-export default ToDoListing
+export default UserListing

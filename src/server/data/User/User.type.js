@@ -3,14 +3,13 @@ import {
     GraphQLObjectType as ObjectType,
     GraphQLID as ID,
     GraphQLString as StringType,
-    GraphQLNonNull as NonNull
 } from 'graphql'
 
-export const userType = new ObjectType({
+export const UserType = new ObjectType({
     name: 'User',
     fields: {
-        _id: { type: new NonNull(ID) },
+        _id: { type: ID },
         name: { type: StringType },
-        city: {type: StringType}
+        type: { type: StringType }
     }
 })

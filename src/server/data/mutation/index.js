@@ -1,5 +1,5 @@
-import {createToDo} from '../todo/todo.mutation'
+import {createUser} from '../User/User.mutation'
 
 export default {
-    createToDo
+    createUser
 }

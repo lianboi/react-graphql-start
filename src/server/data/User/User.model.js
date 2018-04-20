@@ -4,9 +4,9 @@ const UserSchema = new Mongoose.Schema( {
     name: {
         type: String
     },
-    city: {
+    type: {
         type: String
     }
-
 })
+
 module.exports= Mongoose.model('User',UserSchema)

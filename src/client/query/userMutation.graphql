@@ -1,0 +1,6 @@
+mutation createUser($name: String, $type: String) {
+    createUser(name: $name, type: $type) {
+        name,
+        type
+    }
+}
