@@ -5,6 +5,7 @@ const webpack = require('webpack')
 module.exports = {
     mode: "production",
     entry: [
+        'babel-polyfill',
         path.resolve(__dirname, "src/client/index.js"),
         'react-hot-loader/patch'
     ],

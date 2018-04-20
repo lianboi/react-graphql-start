@@ -12,7 +12,6 @@ export const createUser = {
         type: { type: String }
     },
     async resolve({request},params) {
-        console.log( params )
         let user = await User.create({
             name: params.name,
             type: params.type

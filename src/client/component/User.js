@@ -2,47 +2,67 @@ import React, {Component} from 'react'
 import { graphql, withApollo, compose } from 'react-apollo'
 import UserForm from './userForm'
 import UserList from './userListing'
+import _ from 'lodash'
 
 import fetchUser from '../query/fetchUser.graphql'
 import createUser from '../query/userMutation.graphql'
 
 class userContainer extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            user: []
-        }
-    }
 
-    networkHit =  (payload) => {
-        let {data} =  this.props.client.mutate({
+    networkHit =  async (payload) => {
+        let {data} =  await this.props.client.mutate({
             mutation: createUser,
             variables: payload
         })
-        console.log( data )
     }
 
-    getUser = (paylaod) => {
-        let userList = this.state.user
-        userList.push(paylaod)
-        this.setState({
-            user: userList
+    getUser = (payload) => {
+        this.props.addUser({
+            variables: payload,
+            optimisticResponse: {
+                createUser: {
+                    name: payload.name,
+                    type: payload.type,
+                    __typename: 'User'
+                }
+            },
+            update: (store, { data: { createUser } }) => {
+
+                const data = store.readQuery({
+                    query: fetchUser,
+                })
+
+                let _data = ''
+                if(data && data.fetchUser) {
+                    payload['__typename'] = 'User'
+                    _data = _.cloneDeep(data)
+                    _data.fetchUser.unshift(payload)
+                }
+
+                store.writeQuery({
+                    query: fetchUser,
+                    data: Object.assign({}, _data)
+                })
+            }
         })
-        this.networkHit(paylaod)
-        console.log( this.state.user, this.props )
+        //this.networkHit(paylaod)
     }
 
     render() {
         const {data: fetchUser, loading} = this.props
+
         return (
             <div className="panel panel-default" style={{'height': 'auto', 'width':'900px', 'margin': '0 auto'}}>
                 <div className="panel-heading">User Form</div>
                 <div className="panel-body">
                     <UserForm getUser = {this.getUser}/>
                 </div>
-                <div className="panel-body">
-                    <UserList users = {fetchUser}/>
-                </div>
+                {
+                    !loading ?
+                        <div className="panel-body">
+                            <UserList users = {fetchUser.fetchUser}/>
+                        </div> : null
+                }
             </div>
         )
     }
@@ -50,9 +70,14 @@ class userContainer extends Component {
 
 const fetchUserOptions = {
     fetchPolicy: 'network-only'
-
 }
+
+const createUserOption = {
+    name: 'addUser'
+}
+
 export default compose(
     withApollo,
-    graphql(fetchUser, fetchUserOptions)
+    graphql(fetchUser, fetchUserOptions),
+    graphql(createUser, createUserOption)
 )(userContainer)
