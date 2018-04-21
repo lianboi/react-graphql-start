@@ -1,5 +1,10 @@
 import { userType } from '../type'
 
+import {
+    GraphQLNonNull,
+    GraphQLID
+} from 'graphql'
+
 export const userMutation = {
     type: userType,
     args: {
